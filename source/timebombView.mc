@@ -1,9 +1,7 @@
 using Toybox.WatchUi as Ui;
 using Toybox.Graphics as Gfx;
-using Toybox.Attention as Attention;
-using Toybox.Math as Math;
 
-class timebombView extends Ui.View {
+class TimebombView extends Ui.View {
 
 	hidden var model;
 	hidden var counter;
@@ -43,39 +41,4 @@ class timebombView extends Ui.View {
     function drawInTheMiddle(dc, text){
     	dc.drawText(dc.getWidth()/2, dc.getHeight()*0.3, Gfx.FONT_NUMBER_HOT, text, Gfx.TEXT_JUSTIFY_CENTER);
     }
-}
-
-class ExpressionFactory{
-
-	static function create(){
-		return new Expression(rand(), rand());
-	}
-	
-	static function rand(){
-		return Math.rand() % 10;
-	}
-}
-
-class Blinker {
-
-	var counter = 0;
-	var timer;
-	var limit;
-	var state = true;
-	
-	function blink(times) {
-		limit = times;
-		timer = new Timer.Timer();
-        timer.start( method(:onTimer), 200, true );
-	}
-	
-	function onTimer() {
-	if (limit == counter) {
-		timer.stop();
-	} else {
-		Attention.backlight(state);
-		state = !state;
-		counter = counter + 1;
-	}
-	}
 }

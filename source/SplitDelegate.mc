@@ -46,16 +46,3 @@ class MenuInputDelegate extends Ui.MenuInputDelegate {
     	}
     }
 }
-
-class NumberPickerDelegate extends Ui.NumberPickerDelegate {
-
-	var model;
-	
-	function initialize(mdl){
-		model = mdl;
-	}
-
-    function onNumberPicked(value) {
-        model.seconds = value;
-    }
-}
