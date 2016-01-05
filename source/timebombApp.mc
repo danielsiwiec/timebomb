@@ -20,7 +20,7 @@ class timebombApp extends App.AppBase {
     function getInitialView() {
         var counter = new Counter();
         var model = new Model(counter);
-        return [ new timebombView(model), new TimebombDelegate(model) ];
+        return [ new SplitView(), new SplitDelegate(model) ];
     }
 
 }
@@ -34,6 +34,10 @@ class Model {
 	function initialize(cntr) {
 		counter = cntr;
 		timer = new Timer.Timer();
+	}
+	
+	function startGame(){
+		Ui.switchToView( new timebombView(self), new TimebombDelegate(self), Ui.SLIDE_IMMEDIATE);
 	}
 	
 	function resetTimer(){
