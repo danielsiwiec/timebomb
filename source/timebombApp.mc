@@ -18,23 +18,18 @@ class timebombApp extends App.AppBase {
 
     //! Return the initial view of your application here
     function getInitialView() {
-        var counter = new Counter();
-        var model = new Model(counter);
+        var model = new Model();
         return [ new SplitView(), new SplitDelegate(model) ];
     }
 
 }
 
 class Model {
-	var counter;
+	var counter = new Counter();
 	var left;
 	var right;
-	var timer;
-	
-	function initialize(cntr) {
-		counter = cntr;
-		timer = new Timer.Timer();
-	}
+	var timer = new Timer.Timer();
+	var seconds = 5;
 	
 	function startGame(){
 		Ui.switchToView( new timebombView(self), new TimebombDelegate(self), Ui.SLIDE_IMMEDIATE);
@@ -42,7 +37,7 @@ class Model {
 	
 	function resetTimer(){
 		timer.stop();
-		timer.start( method(:onTimer), 1000, false );
+		timer.start( method(:onTimer), seconds * 1000, false );
 	}
 	
 	function onTimer() {
@@ -60,7 +55,7 @@ class Model {
     
     function resetGame(){
     	counter = new Counter();
-    	Ui.switchToView( new timebombView(self), new TimebombDelegate(self), Ui.SLIDE_IMMEDIATE);
+    	Ui.switchToView( new SplitView(), new SplitDelegate(self), Ui.SLIDE_IMMEDIATE);
     }
 }
 
