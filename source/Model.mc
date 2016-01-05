@@ -5,18 +5,33 @@ using Toybox.Math as Math;
 
 class Model {
 	var counter = new Counter();
-	var left;
-	var right;
 	var timer = new Timer.Timer();
-	var seconds = 5;
+	var difficulty = easy;
+	var challenge = new Challenge();
 	
 	function startGame(){
 		Ui.switchToView( new TimebombView(self), new TimebombDelegate(self), Ui.SLIDE_IMMEDIATE);
 	}
 	
+	function seconds(){
+		if (difficulty == easy){
+    		return 5;
+    	} else if (difficulty == medium){
+    		return 3;
+    	} else if (difficulty == hard){
+    		return 2;
+    	} else {
+    		return 5;
+    	}
+	}
+	
+	function generateChallenge(){
+		challenge.refresh(difficulty);
+	}
+	
 	function resetTimer(){
 		timer.stop();
-		timer.start( method(:onTimer), seconds * 1000, false );
+		timer.start( method(:onTimer), seconds() * 1000, false );
 	}
 	
 	function onTimer() {
@@ -36,6 +51,30 @@ class Model {
     	counter = new Counter();
     	Ui.switchToView( new SplitView(), new SplitDelegate(self), Ui.SLIDE_IMMEDIATE);
     }
+}
+
+class Challenge {
+	var left;
+	var right;
+	
+	function refresh(difficulty){
+		if (difficulty == hard){
+			Toybox.System.println("HARD");
+			do {
+				left = ExpressionFactory.create();
+				right = ExpressionFactory.create();
+			}
+			while (difference() > 3);
+		} else {
+			left = ExpressionFactory.create();
+			right = ExpressionFactory.create();
+		}
+	}
+	
+	function difference(){
+		var diff = left.value() - right.value();
+		return diff > 0 ? diff : diff * -1;
+	}
 }
 
 class Expression {

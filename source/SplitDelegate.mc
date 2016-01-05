@@ -37,12 +37,6 @@ class MenuInputDelegate extends Ui.MenuInputDelegate {
 	}
 
     function onMenuItem(value) {
-    	if (value == easy){
-    		model.seconds = 5;
-    	} else if (value == medium){
-    		model.seconds = 3;
-    	} else if (value == hard){
-    		model.seconds = 1;
-    	}
+    	model.difficulty = value;
     }
 }

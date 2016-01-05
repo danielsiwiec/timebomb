@@ -9,7 +9,7 @@ class TimebombDelegate extends Ui.BehaviorDelegate
 	}
 	
 	function onSelect() {
-		if (model.right.value() >= model.left.value()){
+		if (model.challenge.right.value() >= model.challenge.left.value()){
 			model.counter.increment();
 		} else {
 			model.counter.decrement();
@@ -19,7 +19,7 @@ class TimebombDelegate extends Ui.BehaviorDelegate
 	}
 	
 	function onNextPage() {
-		if (model.right.value() <= model.left.value()){
+		if (model.challenge.right.value() <= model.challenge.left.value()){
 			model.counter.increment();
 		} else {
 			model.counter.decrement();

@@ -18,13 +18,10 @@ class TimebombView extends Ui.View {
     	if (counter.done()){
     		model.gameOver();
     	} else {
-    		var left = ExpressionFactory.create();
-    		var right = ExpressionFactory.create();
-    		model.left = left;
-    		model.right = right;
+    		model.generateChallenge();
     		setupDisplay(dc);
     		drawAtTheTop(dc, "" + model.counter.value);   
-	        drawInTheMiddle(dc, left.toString() + " ? " + right.toString());
+	        drawInTheMiddle(dc, model.challenge.left.toString() + " ? " + model.challenge.right.toString());
 	    }
     }
     
