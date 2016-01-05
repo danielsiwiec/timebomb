@@ -1,4 +1,6 @@
 using Toybox.Application as App;
+using Toybox.Timer as Timer;
+using Toybox.WatchUi as Ui;
 
 class timebombApp extends App.AppBase {
 
@@ -17,9 +19,50 @@ class timebombApp extends App.AppBase {
     //! Return the initial view of your application here
     function getInitialView() {
         var counter = new Counter();
-        return [ new timebombView(counter), new ClickerDelegate(counter) ];
+        var model = new Model(counter);
+        return [ new timebombView(model), new ClickerDelegate(model) ];
     }
 
+}
+
+class Model {
+	var counter;
+	var left;
+	var right;
+	var timer;
+	
+	function initialize(cntr) {
+		counter = cntr;
+		timer = new Timer.Timer();
+	}
+	
+	function resetTimer(){
+		timer.stop();
+		timer.start( method(:onTimer), 5000, false );
+	}
+	
+	function onTimer() {
+    	counter.decrement();
+    	Ui.requestUpdate();
+    }
+}
+
+class Expression {
+	var one;
+	var two;
+	
+	function initialize(on, tw){
+		one = on;
+		two = tw;
+	}
+	
+	function value(){
+		return one * two;
+	}
+	
+	function toString(){
+		return "" + one + " x " + two;
+	}
 }
 
 class Counter {

@@ -2,14 +2,28 @@ using Toybox.WatchUi as Ui;
 
 class ClickerDelegate extends Ui.BehaviorDelegate
 {
-	hidden var counter;
+	hidden var model;
 	
-	function initialize(start) {
-		counter = start;
+	function initialize(mdl) {
+		model = mdl;
 	}
 	
 	function onSelect() {
-		counter.increment();
+		if (model.right.value() >= model.left.value()){
+			model.counter.increment();
+		} else {
+			model.counter.decrement();
+		}
+		Ui.requestUpdate();
+		return true;
+	}
+	
+	function onNextPage() {
+		if (model.right.value() <= model.left.value()){
+			model.counter.increment();
+		} else {
+			model.counter.decrement();
+		}
 		Ui.requestUpdate();
 		return true;
 	}
