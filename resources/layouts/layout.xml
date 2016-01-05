@@ -1,0 +1,3 @@
+<layout id="BoomLayout">
+    <bitmap id="id_boom" x="center" y="center" filename="../drawables/boom.jpeg" />
+</layout>
