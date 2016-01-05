@@ -20,7 +20,7 @@ class timebombApp extends App.AppBase {
     function getInitialView() {
         var counter = new Counter();
         var model = new Model(counter);
-        return [ new timebombView(model), new ClickerDelegate(model) ];
+        return [ new timebombView(model), new TimebombDelegate(model) ];
     }
 
 }
@@ -38,12 +38,25 @@ class Model {
 	
 	function resetTimer(){
 		timer.stop();
-		timer.start( method(:onTimer), 5000, false );
+		timer.start( method(:onTimer), 1000, false );
 	}
 	
 	function onTimer() {
     	counter.decrement();
     	Ui.requestUpdate();
+    }
+    
+    function gameOver(){
+	    var vibrateData = [ new Attention.VibeProfile(  50, 1000 ) ];
+	    Attention.vibrate( vibrateData );
+	    var blinker = new Blinker();
+	    blinker.blink(20);
+	    Ui.switchToView( new BoomView(), new BoomDelegate(self), Ui.SLIDE_IMMEDIATE);
+    }
+    
+    function resetGame(){
+    	counter = new Counter();
+    	Ui.switchToView( new timebombView(self), new TimebombDelegate(self), Ui.SLIDE_IMMEDIATE);
     }
 }
 

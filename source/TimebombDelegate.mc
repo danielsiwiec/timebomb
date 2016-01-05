@@ -1,6 +1,6 @@
 using Toybox.WatchUi as Ui;
 
-class ClickerDelegate extends Ui.BehaviorDelegate
+class TimebombDelegate extends Ui.BehaviorDelegate
 {
 	hidden var model;
 	
@@ -27,4 +27,5 @@ class ClickerDelegate extends Ui.BehaviorDelegate
 		Ui.requestUpdate();
 		return true;
 	}
+	
 }

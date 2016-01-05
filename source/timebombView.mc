@@ -18,7 +18,7 @@ class timebombView extends Ui.View {
     {   
     	model.resetTimer();
     	if (counter.done()){
-    		gameOver();
+    		model.gameOver();
     	} else {
     		var left = ExpressionFactory.create();
     		var right = ExpressionFactory.create();
@@ -43,15 +43,6 @@ class timebombView extends Ui.View {
     function drawInTheMiddle(dc, text){
     	dc.drawText(dc.getWidth()/2, dc.getHeight()*0.3, Gfx.FONT_NUMBER_HOT, text, Gfx.TEXT_JUSTIFY_CENTER);
     }
-    
-    function gameOver(){
-	    var vibrateData = [ new Attention.VibeProfile(  50, 1000 ) ];
-	    Attention.vibrate( vibrateData );
-	    var blinker = new Blinker();
-	    blinker.blink(20);
-	    Ui.switchToView( new BoomView(), new Ui.BehaviorDelegate(), Ui.SLIDE_IMMEDIATE);
-    }
-
 }
 
 class ExpressionFactory{
