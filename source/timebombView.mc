@@ -18,7 +18,7 @@ class TimebombView extends Ui.View {
     	if (counter.done()){
     		model.gameOver();
     	} else {
-    		model.generateChallenge();
+    		model.newChallenge();
     		setupDisplay(dc);
     		drawAtTheTop(dc, "" + model.counter.value);   
 	        drawInTheMiddle(dc, model.challenge.left.toString() + " ? " + model.challenge.right.toString());

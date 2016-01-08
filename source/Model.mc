@@ -7,7 +7,7 @@ class Model {
 	var counter = new Counter();
 	var timer = new Timer.Timer();
 	var difficulty = easy;
-	var challenge = new Challenge();
+	var challenge = ChallengeFactory.create(difficulty);
 	
 	function startGame(){
 		Ui.switchToView( new TimebombView(self), new TimebombDelegate(self), Ui.SLIDE_IMMEDIATE);
@@ -25,8 +25,8 @@ class Model {
     	}
 	}
 	
-	function generateChallenge(){
-		challenge.refresh(difficulty);
+	function newChallenge(){
+		challenge = ChallengeFactory.create(difficulty);
 	}
 	
 	function resetTimer(){
@@ -57,23 +57,27 @@ class Challenge {
 	var left;
 	var right;
 	
-	function refresh(difficulty){
-		if (difficulty == hard){
-			Toybox.System.println("HARD");
-			do {
-				left = ExpressionFactory.create();
-				right = ExpressionFactory.create();
-			}
-			while (difference() > 3);
-		} else {
-			left = ExpressionFactory.create();
-			right = ExpressionFactory.create();
-		}
+	function initialize(l, r){
+		left = l;
+		right = r;
 	}
 	
 	function difference(){
 		var diff = left.value() - right.value();
 		return diff > 0 ? diff : diff * -1;
+	}
+	
+}
+
+class ChallengeFactory {
+
+	static function create(difficulty) {
+		var challenge;
+		do {
+			challenge = new Challenge(ExpressionFactory.create(), ExpressionFactory.create());
+		}
+		while (difficulty == hard && (challenge.difference() > 3 || challenge.difference() == 0));
+		return challenge; 
 	}
 }
 
