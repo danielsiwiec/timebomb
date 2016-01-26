@@ -76,8 +76,12 @@ class ChallengeFactory {
 		do {
 			challenge = new Challenge(ExpressionFactory.create(), ExpressionFactory.create());
 		}
-		while (difficulty == hard && (challenge.difference() > 3 || challenge.difference() == 0));
+		while (difficulty == hard && !qualifiesForHard(challenge));
 		return challenge; 
+	}
+	
+	static function qualifiesForHard(challenge) {
+		return challenge.difference() < 3 && challenge.difference() != 0 && challenge.left.value() != 0 && challenge.right.value() != 0;
 	}
 }
 
