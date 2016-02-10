@@ -6,7 +6,7 @@ using Toybox.Math as Math;
 class Model {
 	var counter = new Counter();
 	var timer = new Timer.Timer();
-	var difficulty = easy;
+	var difficulty = medium;
 	var challenge = ChallengeFactory.create(difficulty);
 	
 	function startGame(){
@@ -19,7 +19,7 @@ class Model {
     	} else if (difficulty == medium){
     		return 3;
     	} else if (difficulty == hard){
-    		return 2;
+    		return 1;
     	} else {
     		return 5;
     	}
