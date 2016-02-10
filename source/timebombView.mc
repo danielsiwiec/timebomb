@@ -22,7 +22,13 @@ class TimebombView extends Ui.View {
     		setupDisplay(dc);
     		drawAtTheTop(dc, "" + model.counter.value);   
 	        drawInTheMiddle(dc, model.challenge.left.toString() + " ? " + model.challenge.right.toString());
+	        drawArrows(dc);
 	    }
+    }
+    
+    function drawArrows(dc){
+    	dc.drawText(dc.getWidth()*0.15, dc.getHeight()*0.7, Gfx.FONT_LARGE, "<", Gfx.TEXT_JUSTIFY_CENTER);
+    	dc.drawText(dc.getWidth()*0.9, dc.getHeight()*0.2, Gfx.FONT_LARGE, ">", Gfx.TEXT_JUSTIFY_CENTER);
     }
     
     function setupDisplay(dc){
