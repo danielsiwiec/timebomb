@@ -8,7 +8,7 @@ class BoomDelegate extends Ui.BehaviorDelegate
 		model = mdl;
 	}
 	
-	function onPreviousPage() {
+	function onBack() {
 		model.resetGame();
 		return true;
 	}
